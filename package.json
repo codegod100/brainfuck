@@ -1,0 +1,23 @@
+{
+  "name": "brainfuck",
+  "version": "1.0.0",
+  "description": "Brainfuck compiler ported to TypeScript",
+  "type": "commonjs",
+  "bin": {
+    "bfc": "dist/bfc.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/bfc.js"
+  },
+  "keywords": [
+    "brainfuck",
+    "compiler"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}

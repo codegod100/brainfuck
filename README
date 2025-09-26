@@ -1,5 +1,57 @@
-			BRAINFUCK
-		A Brainfuck compiler
-INSTALL
-	Use the darn Makefile
-	Or use the AUR (it is on there)
+BRAINFUCK (TypeScript)
+======================
+
+A TypeScript port of the original brainfuck compiler. The CLI mirrors the
+behaviour of the historical `bfc` binary while adding a modern toolchain.
+
+Requirements
+------------
+- Node.js 18+
+- GNU `as` and `ld` available on PATH (for assemble/link steps)
+
+Setup
+-----
+```
+npm install
+npm run build
+```
+This compiles the TypeScript sources to `dist/` and wires up the `bfc` executable
+defined in `package.json`.
+
+Usage
+-----
+```
+node dist/bfc.js [input file] [options]
+```
+Options replicate the C implementation:
+- `-s NUMBER`     set loop stack size
+- `-a ARRSIZE`    set brainfuck tape size
+- `-c`            compile + assemble only (leave object file)
+- `-S`            compile to assembly only
+- `-o FILE`       write output to FILE (assembly/object/binary depending on mode)
+- `-v`            verbose mode
+- `-h`, `--help`  show help
+- `-i`            consume brainfuck program from stdin
+- `-pipe`         pipe assembly to `as`, otherwise print to stdout when used with `-S`
+
+Examples
+--------
+Compile, assemble, and link a program:
+```
+node dist/bfc.js hello_world.brainfuck -o hello
+```
+
+Compile only and print assembly to stdout:
+```
+node dist/bfc.js hello_world.brainfuck -S -pipe
+```
+
+Compile to an object file without linking:
+```
+node dist/bfc.js hello_world.brainfuck -c -o hello.o
+```
+
+Development
+-----------
+Re-run `npm run build` after making changes. You can symlink `dist/bfc.js`
+into your PATH or use `npm link` for a global executable if desired.
